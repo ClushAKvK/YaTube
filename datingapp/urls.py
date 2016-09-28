@@ -22,7 +22,7 @@ from datingapp.views import auth_views, user_views, views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^test/', views.test_view)
+    # url(r'^test/', views.test_view)
 ]
 
 urlpatterns += [

@@ -17,7 +17,7 @@ def profile(request, attribute=''):
 
             token = request.META['HTTP_TOKEN']
             user = Token.objects.get(pk=token).user
-
+            print(user)
             gender_choices = ['Man', 'Woman']
             orientation_choices = ['Straight', 'Gay']
             if attribute == 'details':
@@ -105,40 +105,40 @@ def get_users(request):
 @csrf_exempt
 def get_req_user(request):
     if request.method == 'GET':
-        reqUser = ExtUser.objects.get(username=request.GET.get('reqUser'))
+        req_user = ExtUser.objects.get(username=request.GET.get('reqUser'))
 
         token = request.META['HTTP_TOKEN']
         user = Token.objects.get(pk=token).user
 
-        user.create_visit(reqUser)
+        user.create_visit(req_user)
 
-        if reqUser.gender == 'M':
+        if req_user.gender == 'M':
             gender = 'Man'
         else:
             gender = 'Woman'
-        if reqUser.orientation == 'S':
+        if req_user.orientation == 'S':
             orientation = 'Straight'
         else:
             orientation = 'Gay'
 
         return JsonResponse(
             {
-                'id': reqUser.id,
-                'username': reqUser.username,
-                'email': reqUser.email,
-                'location': reqUser.location,
+                'id': req_user.id,
+                'username': req_user.username,
+                'email': req_user.email,
+                'location': req_user.location,
                 'orientation': orientation,
                 'gender': gender,
-                'birthday': reqUser.birthday,
-                'photo_url': ('http://' + request.get_host() + reqUser.profile.photo.url),
-                'summary': reqUser.profile.summary,
-                'language': reqUser.profile.language,
-                'base': reqUser.profile.base,
-                'life': reqUser.profile.life,
-                'good': reqUser.profile.good,
-                'favorite': reqUser.profile.favorite,
-                'badge': reqUser.profile.badge,
-                'like': user.get_like_on_user(reqUser)
+                'birthday': req_user.birthday,
+                'photo_url': ('http://' + request.get_host() + req_user.profile.photo.url),
+                'summary': req_user.profile.summary,
+                'language': req_user.profile.language,
+                'base': req_user.profile.base,
+                'life': req_user.profile.life,
+                'good': req_user.profile.good,
+                'favorite': req_user.profile.favorite,
+                'badge': req_user.profile.badge,
+                'like': user.get_like_on_user(req_user)
             }
         )
 
@@ -148,20 +148,20 @@ def get_req_user(request):
 @csrf_exempt
 def likes_friendship(request, kind=''):
     try:
-        reqUserUsername = request.GET.get('reqUser', '')
-        reqUser = ''
-        if reqUserUsername != '':
-            reqUser = ExtUser.objects.get(username=request.GET.get('reqUser'))
+        req_username = request.GET.get('reqUser', False)
+        req_user = ''
+        if req_username:
+            req_user = ExtUser.objects.get(username=req_username)
 
         token = request.META['HTTP_TOKEN']
         user = Token.objects.get(pk=token).user
 
         if kind == 'create':
-            user.create_friendship(reqUser)
+            user.create_friendship(req_user)
             return HttpResponse('Like created.')
 
         elif kind == 'delete':
-            if user.delete_friendship(reqUser) is True:
+            if user.delete_friendship(req_user) is True:
                 return HttpResponse('Like deleted.')
 
         elif kind == 'getMutually':
@@ -200,10 +200,10 @@ def likes_friendship(request, kind=''):
         elif kind == 'getSentLikes':
             likes1, likes2 = user.get_sent_requests_for_friendship()
 
-            sentLikes = list(chain(likes1, likes2))
+            sent_likes = list(chain(likes1, likes2))
             likes = []
 
-            for sent in sentLikes:
+            for sent in sent_likes:
                 if sent.friend != user:
                     likes.append(
                         {
@@ -232,9 +232,9 @@ def likes_friendship(request, kind=''):
             )
 
         elif kind == 'getOwnLikes':
-            ownLikes = user.get_requests_for_friendships()
+            own_likes = user.get_requests_for_friendships()
             likes = []
-            for like in ownLikes:
+            for like in own_likes:
                 likes.append(
                     {
                         'username': like.creator.username,
