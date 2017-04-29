@@ -59,7 +59,6 @@ def facebook(request):
                     )
 
         except Exception as e:
-            print(e)
             return HttpResponseBadRequest('Something went wrong.')
     return HttpResponseBadRequest('Only POST request.')
 
@@ -76,7 +75,6 @@ def login(request):
             try:
                 user = auth.authenticate(username=identificator, password=password)
             except Exception as e:
-                print(e)
                 return HttpResponseBadRequest('Some errors with login.')
 
             if user:
@@ -140,7 +138,6 @@ def register(request):
                     }
                 )
         except Exception as e:
-            print(e)
             return HttpResponseBadRequest('Errors with creating user.')
 
     return HttpResponseBadRequest('Only POST request.')
