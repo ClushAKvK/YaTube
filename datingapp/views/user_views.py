@@ -17,7 +17,6 @@ def profile(request, attribute=''):
 
             token = request.META['HTTP_TOKEN']
             user = Token.objects.get(pk=token).user
-            print(user)
             gender_choices = ['Man', 'Woman']
             orientation_choices = ['Straight', 'Gay']
             if attribute == 'details':
@@ -40,7 +39,6 @@ def profile(request, attribute=''):
         except Token.DoesNotExist:
             return HttpResponseBadRequest('Token does not exist.')
         except Exception as e:
-            print(e)
             return HttpResponseBadRequest('Something went wrong.')
     return HttpResponseBadRequest('Only POST request.')
 
@@ -67,7 +65,6 @@ def profile_photo(request):
     except Token.DoesNotExist:
         return HttpResponseBadRequest('Token does not exist.')
     except Exception as e:
-        print(e)
         return HttpResponseBadRequest('Something went wrong.')
 
 
@@ -98,7 +95,6 @@ def get_users(request):
         return HttpResponseBadRequest('Token does not exist')
 
     except Exception as e:
-        print(e)
         return HttpResponseBadRequest('Something went wrong.')
 
 
@@ -253,7 +249,6 @@ def likes_friendship(request, kind=''):
         return HttpResponseBadRequest('Token does not exist.')
 
     except Exception as e:
-        print(e)
         return HttpResponseBadRequest('Something went wrong.')
 
 
