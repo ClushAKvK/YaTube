@@ -1,6 +1,7 @@
 from django.db import models
-from ExtUser.models import ExtUser
 from django.utils.timezone import now
+
+from ExtUser.models import ExtUser
 
 # Create your models here.
 
@@ -25,4 +26,4 @@ class Friendship(models.Model):
     )
 
     def __str__(self):
-        return "Creator: " + str(self.creator) + "; Friend: " + str(self.friend)
+        return "Creator: {0}; Friend: {1}".format(str(self.creator), str(self.friend))
