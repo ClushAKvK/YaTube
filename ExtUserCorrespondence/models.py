@@ -1,6 +1,7 @@
 from django.db import models
-from ExtUser.models import ExtUser
 from django.utils.timezone import now
+
+from ExtUser.models import ExtUser
 
 # Create your models here.
 
