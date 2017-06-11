@@ -1,6 +1,7 @@
 from django.db import models
-from ExtUser.models import ExtUser
 from django.utils.timezone import now
+
+from ExtUser.models import ExtUser
 
 # Create your models here.
 
@@ -22,4 +23,4 @@ class Visitor(models.Model):
     )
 
     def __str__(self):
-        return self.visitor.username + ' to ' + self.reqUser.username
+        return "{0} to {1}".format(self.visitor.username, self.reqUser.username)
