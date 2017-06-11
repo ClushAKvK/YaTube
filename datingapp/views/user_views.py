@@ -1,11 +1,14 @@
-from ExtUser.models import ExtUser
-from django.http import JsonResponse, HttpResponseBadRequest, HttpResponse
-import json
-from django.core.files import File
-from io import BytesIO
 from django.views.decorators.csrf import csrf_exempt
+from django.core.files import File
+from django.http import JsonResponse, HttpResponseBadRequest, HttpResponse
+
 from rest_framework.authtoken.models import Token
+
+import json
+from io import BytesIO
 from itertools import chain
+
+from ExtUser.models import ExtUser
 
 
 @csrf_exempt
