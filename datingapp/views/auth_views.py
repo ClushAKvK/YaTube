@@ -1,12 +1,15 @@
-from ExtUser.models import ExtUser
 from django.contrib import auth
 from django.http import JsonResponse, HttpResponseBadRequest
 from django.core.files import File
-import json
 from django.views.decorators.csrf import csrf_exempt
+
+from rest_framework.authtoken.models import Token
+
+import json
 from io import BytesIO
 from urllib.request import urlopen, urlparse
-from rest_framework.authtoken.models import Token
+
+from ExtUser.models import ExtUser
 
 
 def check_json_data(json_data):
