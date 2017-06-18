@@ -296,4 +296,4 @@ class ExtUserProfile(models.Model):
     )
 
     def __str__(self):
-        return self.user.username + '\' Profile'
+        return '%s\'s Profile' % self.user.username
