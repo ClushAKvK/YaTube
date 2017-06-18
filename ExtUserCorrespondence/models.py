@@ -66,4 +66,4 @@ class ExtUserDialog(models.Model):
         return friends[:-4]
 
     def __str__(self):
-        return 'Dialog '+ str(self.id)
+        return 'Dialog %d' % self.id
