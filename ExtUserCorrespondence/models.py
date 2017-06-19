@@ -60,10 +60,7 @@ class ExtUserDialog(models.Model):
     )
 
     def friends_get(self):
-        friends = ''
-        for friend in self.friends.all():
-            friends += str(friend) + ' and '
-        return friends[:-4]
+        return " and ".join(self.friends.all())
 
     def __str__(self):
         return 'Dialog %d' % self.id
