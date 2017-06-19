@@ -34,11 +34,9 @@ def facebook(request):
             try:
                 user = ExtUser.objects.get(username=json_data['username'])
                 Token.objects.get(user=user)
-                return JsonResponse(
-                    {
+                return JsonResponse({
                         'message': 'User and token already exist.'
-                    }
-                )
+                    })
             except ExtUser.DoesNotExist:
                 json_data = check_json_data(json_data)
                 new_user = ExtUser.objects.create_user(
@@ -53,13 +51,12 @@ def facebook(request):
                 new_user.photo.save(image_name, File(image_file))
                 new_user.save()
                 token = Token.objects.create(user=new_user)
+
                 if new_user:
-                    return JsonResponse(
-                        {
+                    return JsonResponse({
                             'message': 'User is created. Sign in please.',
                             'token': token.key
-                        }
-                    )
+                        })
 
         except Exception as e:
             return HttpResponseBadRequest('Something went wrong.')
