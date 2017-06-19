@@ -17,8 +17,9 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf.urls.static import static
-from datingapp import settings
+
 from datingapp.views import auth_views, user_views, views
+from datingapp import settings
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
