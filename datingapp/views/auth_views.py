@@ -78,10 +78,8 @@ def login(request):
                 return HttpResponseBadRequest('Some errors with login.')
 
             if user:
-                if user.gender == 'M':
-                    gender = 'Man'
-                else:
-                    gender = 'Woman'
+                gender = 'Man' if user.gender == 'M' else 'Woman'
+
                 if user.orientation == 'S':
                     orientation = 'Straight'
                 else:
