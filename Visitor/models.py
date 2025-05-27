@@ -1,3 +1,5 @@
+import os
+
 from django.db import models
 from django.utils.timezone import now
 
@@ -5,11 +7,11 @@ from ExtUser.models import ExtUser
 
 # Create your models here.
 
-
 class Visitor(models.Model):
     visitor = models.ForeignKey(
         ExtUser,
-        related_name='visitor'
+        related_name='visitor',
+        on_delete=models.CASCADE
     )
 
     visitDate = models.DateField(
@@ -19,7 +21,8 @@ class Visitor(models.Model):
 
     reqUser = models.ForeignKey(
         ExtUser,
-        related_name='reqUser'
+        related_name='reqUser',
+        on_delete=models.CASCADE
     )
 
     def __str__(self):

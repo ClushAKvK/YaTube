@@ -13,11 +13,13 @@ class Friendship(models.Model):
     )
     creator = models.ForeignKey(
         ExtUser,
-        related_name='Friendship_creator'
+        related_name='Friendship_creator',
+        on_delete=models.CASCADE
     )
     friend = models.ForeignKey(
         ExtUser,
-        related_name='Friends_set'
+        related_name='Friends_set',
+        on_delete=models.CASCADE
     )
     accepted = models.BooleanField(
         default=False,

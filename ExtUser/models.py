@@ -236,6 +236,7 @@ class ExtUser(AbstractUser):
 class ExtUserProfile(models.Model):
     user = models.OneToOneField(
         ExtUser,
+        on_delete=models.CASCADE,
         unique=True,
         related_name='profile'
     )

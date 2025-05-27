@@ -3,4 +3,4 @@ media
 venv
 __pycache__
 *.pyc
-settings.py
+datingapp/settings.py

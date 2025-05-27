@@ -10,12 +10,14 @@ class ExtUserMessage(models.Model):
     owner = models.ForeignKey(
         ExtUser,
         related_name='owner',
-        default=0
+        default=0,
+        on_delete=models.CASCADE
     )
     recipient = models.ForeignKey(
         ExtUser,
         related_name='recipient',
-        default=0
+        default=0,
+        on_delete=models.CASCADE
     )
     message = models.TextField(
         'Message',
